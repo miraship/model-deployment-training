@@ -7,5 +7,3 @@ def predict(age, salary, gender):
     if output[0] == 1:
         return "Purchased"
     return "Not Purchased"
-
-print(predict(1, 500, 20))
