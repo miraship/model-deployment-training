@@ -18,7 +18,6 @@ with st.form("predicition_form"):
         furnishingstatus = st.selectbox(
             "Furnishing Status", ["Unfurnished", "Semi-Furnished", "Furnished"]
         )
-        submitButton = st.form_submit_button("Predict")
 
     with col2:
         mainroad = int(st.toggle("Is on the mainroad?"))
@@ -27,6 +26,11 @@ with st.form("predicition_form"):
         hotwaterheating = int(st.toggle("Has water heating?"))
         airconditioning = int(st.toggle("Has Air Conditioning?"))
         parking = int(st.toggle("Has parking?"))
+
+    st.divider()
+    submitButton = st.form_submit_button(
+        "Predict House Price", width="stretch", type="primary"
+    )
 
     if submitButton:
         with st.spinner("Predicting house price"):
@@ -50,7 +54,6 @@ with st.form("predicition_form"):
             }
 
             response = requests.post("http://localhost:8000/ai/predict", json=payload)
-
             if response.status_code == 200 and response.json():
                 st.success(f"House Price: {response.json()['house_price']}")
             else:
