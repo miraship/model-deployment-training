@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from api.routes import SystemRouter
+from routes import SystemRouter
 
 
 app = FastAPI()
