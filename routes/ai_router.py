@@ -1,11 +1,12 @@
-import joblib
+import joblib as jb
+import pandas as pd
 from fastapi import APIRouter
 from models import PredictionRequest, PredictionResponse
 
 router = APIRouter(tags=["AI"], prefix="/ai")
-model = joblib.load("models/model.pkl")
-scaler = joblib.load("models/scaler.pkl")
-columns = joblib.load("models/columns.pkl")
+model = jb.load("models/model.pkl")
+scaler = jb.load("models/scaler.pkl")
+columns = jb.load("models/columns.pkl")
 
 
 @router.get("/")
@@ -18,4 +19,7 @@ def ai_health_check():
     response_model=PredictionResponse,
 )
 def predict(request: PredictionRequest):
-    pass
+    input = pd.DataFrame([request.model_dump()])[columns]
+    scaled_input = scaler.transform(input)
+    price = model.predict(scaled_input)[0]
+    return {"house_price": price}
