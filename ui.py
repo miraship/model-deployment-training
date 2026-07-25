@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 
+st.set_page_config(page_title="House Price Prediction App", page_icon="🏠")
+
 st.title("House Price Prediction App")
 st.text("Estimate the market value of a house using a trained machine learning model.")
 
