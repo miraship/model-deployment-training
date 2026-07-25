@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-from models import PredictionRequest
 
 st.title("House Price Prediction App")
 st.text("Estimate the market value of a house using a trained machine learning model.")
