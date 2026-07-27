@@ -1,5 +1,11 @@
+import os
 import streamlit as st
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+BACKEND_URL = os.getenv("BACKEND_URL")
 
 st.set_page_config(page_title="House Price Prediction App", page_icon="🏠")
 
@@ -53,7 +59,7 @@ with st.form("predicition_form"):
                 "prefarea": 0,
             }
 
-            response = requests.post("http://localhost:8000/ai/predict", json=payload)
+            response = requests.post(f"{BACKEND_URL}/ai/predict", json=payload)
             if response.status_code == 200 and response.json():
                 st.success(f"House Price: {response.json()['house_price']}")
             else:
